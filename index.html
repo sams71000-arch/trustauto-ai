@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrustAuto AI</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:20px;color:#172033}
+main{max-width:600px;margin:auto;background:white;padding:24px;border-radius:18px;box-shadow:0 4px 18px #0001}
+h1{color:#1364d8}label{display:block;margin-top:18px;font-weight:bold}
+input,textarea{box-sizing:border-box;width:100%;padding:13px;margin-top:8px;border:1px solid #aab4c3;border-radius:10px;font-size:16px}
+button{width:100%;margin-top:20px;padding:15px;background:#1364d8;color:white;border:0;border-radius:10px;font-size:16px}
+#resultat{margin-top:20px;padding:16px;border-radius:10px;background:#eaf2ff;display:none;line-height:1.6}
+small{color:#64748b}
+</style>
+</head>
+<body>
+<main>
+<h1>🚗 TrustAuto AI</h1>
+<p>Assistant automobile - prototype</p>
+<label>Votre véhicule</label>
+<input id="vehicule" placeholder="Ex : Renault Clio 5">
+<label>Décrivez votre problème</label>
+<textarea id="probleme" rows="5" placeholder="Ex : voyant moteur et perte de puissance"></textarea>
+<button onclick="analyser()">Analyser les symptômes</button>
+<div id="resultat" role="status" aria-live="polite"></div>
+<p><small>Prototype expérimental. Il ne remplace pas un diagnostic professionnel. Aucune donnée n'est envoyée à un serveur.</small></p>
+</main>
+<script>
+function analyser(){
+const v=document.getElementById("vehicule").value.trim()||"votre véhicule";
+const p=document.getElementById("probleme").value.toLowerCase();
+const r=document.getElementById("resultat");
+if(!p.trim()){r.textContent="Veuillez décrire le problème.";r.style.display="block";return;}
+let message;
+if(/frein|stop|fumée|fumee|surchauff|pression d.huile|pédale molle|pedale molle/.test(p)){
+message="ALERTE : symptôme potentiellement dangereux. Arrêtez le véhicule en sécurité et demandez un contrôle professionnel avant de reprendre la route.";
+}else if(/moteur|puissance|turbo|injection|accél|acceler/.test(p)){
+message="Piste préliminaire : gestion moteur, admission, injection ou capteurs. Une lecture des codes défaut OBD est recommandée.";
+}else if(/batterie|démarr|demarr|alternateur/.test(p)){
+message="Piste préliminaire : batterie ou circuit de charge. Faire contrôler l'alimentation électrique.";
+}else{
+message="Des informations supplémentaires sont nécessaires : voyants, circonstances d'apparition et éventuels codes défaut.";
+}
+r.textContent="Analyse pour "+v+" : "+message;
+r.style.display="block";
+}
+</script>
+</body>
+</html>
