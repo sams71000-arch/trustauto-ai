@@ -1,0 +1,20 @@
+
+{
+  "name": "TrustAuto AI",
+  "description": "Assistant automobile intelligent propulsé par Cloudflare AI. Analyse les symptômes des véhicules et propose des pistes de diagnostic et des recommandations de sécurité.",
+  "url": "https://sams71000-arch.github.io/trustauto-ai/",
+  "version": "2.0",
+  "category": "Automotive AI Assistant",
+  "network": "Concordium Testnet",
+  "agentId": "999",
+  "status": "active",
+  "features": [
+    "Vehicle symptom analysis",
+    "AI-powered assistance",
+    "Safety recommendations"
+  ],
+  "concordium": {
+    "standard": "CIS-8004",
+    "identityVerification": "planned"
+  }
+}
