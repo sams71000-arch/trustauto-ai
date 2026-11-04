@@ -46,6 +46,52 @@ conseil='Cette analyse est indicative et ne confirme aucune panne.';
 }
 res.innerHTML='<h2><span>✿</span> Analyse TrustAuto AI</h2><p><strong>Véhicule :</strong> '+escapeHtml(v)+'</p><p><strong>Analyse préliminaire :</strong> '+escapeHtml(diagnostic)+'</p><p><strong>Pistes de vérification :</strong></p><ul>'+pistes.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul><p class="recommend"><strong>✓ Recommandation :</strong> '+escapeHtml(conseil)+'</p>';
 res.className='result visible';}
-document.getElementById('analyser').addEventListener('click',analyser);
+// Ancienne analyse desactivee : utilisation de l'IA Cloudflare
 </script>
+
+<script>
+document.getElementById("analyser").addEventListener(
+  "click",
+  async function(event) {
+    event.stopImmediatePropagation();
+
+    const vehicule = document.getElementById("vehicule").value.trim();
+    const probleme = document.getElementById("probleme").value.trim();
+    const resultat = document.getElementById("resultat");
+
+    resultat.classList.add("visible");
+
+    if (!vehicule || !probleme) {
+      resultat.textContent = "Veuillez indiquer le vehicule et les symptomes.";
+      return;
+    }
+
+    resultat.textContent = "TrustAuto AI analyse vos symptomes...";
+
+    try {
+      const reponse = await fetch(
+        "https://trustauto-ai-api.sams71000.workers.dev/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ vehicule, probleme })
+        }
+      );
+
+      const donnees = await reponse.json();
+
+      if (!reponse.ok) {
+        throw new Error(donnees.erreur || "Erreur du serveur");
+      }
+
+      resultat.textContent = donnees.analyse || "Aucune analyse disponible.";
+    } catch (erreur) {
+      resultat.textContent = "Analyse indisponible : " + erreur.message;
+    }
+  },
+  true
+);
+</script>
+
 </body></html>
+  
