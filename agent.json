@@ -1,9 +1,13 @@
-
 {
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "name": "TrustAuto AI",
-  "description": "Assistant automobile intelligent propulsé par Cloudflare AI. Analyse les symptômes des véhicules et propose des pistes de diagnostic et des recommandations de sécurité.",
+  "description": "Assistant automobile intelligent. Analyse les symptômes des véhicules, propose des pistes de diagnostic et des recommandations de sécurité.",
   "url": "https://sams71000-arch.github.io/trustauto-ai/",
-  "version": "2.0",
+  "version": "2.0.0",
+  "provider": {
+    "organization": "TrustAuto AI",
+    "url": "https://sams71000-arch.github.io/trustauto-ai/"
+  },
   "category": "Automotive AI Assistant",
   "network": "Concordium Testnet",
   "agentId": "999",
@@ -13,8 +17,66 @@
     "AI-powered assistance",
     "Safety recommendations"
   ],
-  "concordium": {
-    "standard": "CIS-8004",
-    "identityVerification": "planned"
-  }
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "vehicle-diagnosis",
+      "name": "Vehicle symptom analysis",
+      "description": "Assistance au diagnostic automobile et conseils de sécurité.",
+      "tags": [
+        "automobile",
+        "diagnostic",
+        "safety"
+      ]
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extensions": [
+      {
+        "uri": "https://docs.concordium.com/a2a-extensions/concordium-badge/v1",
+        "description": "Verified by Concordium badge — on-chain agent identity in a CIS-8004 registry",
+        "required": false,
+        "params": {
+          "tokenAddress": "ccd:4221332d34e1694168c2a0c0b3fd0f27/cis-2:JyP9YFFBMp4379p2q14tr",
+          "owner": {
+            "account": "ccd:4221332d34e1694168c2a0c0b3fd0f27:4t7DhkbpCssGc9SY5Ym3Su6Apz69HJ1pmYL9YSLDMKJ4n1yoDf"
+          },
+          "agentWallet": "ccd:4221332d34e1694168c2a0c0b3fd0f27:4t7DhkbpCssGc9SY5Ym3Su6Apz69HJ1pmYL9YSLDMKJ4n1yoDf",
+          "contracts": {
+            "cis8004": "ccd:4221332d34e1694168c2a0c0b3fd0f27:12802.0",
+            "cis8": "ccd:4221332d34e1694168c2a0c0b3fd0f27:12801.0"
+          },
+          "verify": "Resolve tokenAddress via CIS-8004 agent_of; confirm owner + status=Active + card SHA-256 == metadata_hash.",
+          "verification": {
+            "service": "Concordium Agent Registry",
+            "verifyUrl": "https://agent-registry-mcp.concordium.com/v1/badge-check/JyP9YFFBMp4379p2q14tr",
+            "mcp": "https://agent-registry-mcp.concordium.com/mcp",
+            "docs": "https://docs.concordium.com/en/mainnet/technical-reference/agent-registry/concordium-badge.html"
+          }
+        }
+      }
+    ]
+  },
+  "services": [
+    {
+      "name": "Web",
+      "endpoint": "https://sams71000-arch.github.io/trustauto-ai/",
+      "version": "2.0.0"
+    }
+  ],
+  "x402Support": false,
+  "active": true,
+  "registrations": [
+    {
+      "agentId": 999,
+      "agentRegistry": "ccd:4221332d34e1694168c2a0c0b3fd0f27:12802.0"
+    }
+  ]
 }
